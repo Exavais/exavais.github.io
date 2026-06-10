@@ -1,0 +1,9 @@
+http://example.com/posts/2274549169/
+http://example.com/tags/index.html
+http://example.com/categories/index.html
+http://example.com/posts/859798956/
+http://example.com/posts/1243066710/
+http://example.com/
+http://example.com/tags/private/
+http://example.com/tags/test/
+http://example.com/categories/test/
