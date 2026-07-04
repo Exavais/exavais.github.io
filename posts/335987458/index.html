@@ -20,31 +20,35 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Just a blog whose meaning we have not yet discovered.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Exavais&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="目标说明本文完成 VPS 从初始可登录状态到生产级安全环境的完整加固流程，为后续 sing-box &#x2F; 代理服务部署提供稳定基础。 主要目标：  SSH 安全加固（密钥登录 + 禁止密码登录） 防火墙策略（UFW） 暴力破解防护（Fail2Ban） 系统时间同步 Swap 内存保障 自动安全更新 基础排错方法建立   SSH 安全加固（核心模块）Step 1：修改 SSH 端口1nano">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS 实战 Step 0：加固与安全初始化">
+<meta property="og:url" content="http://example.com/posts/335987458/index.html">
 <meta property="og:site_name" content="Exavais&#39;s Blog">
-<meta property="og:description" content="Just a blog whose meaning we have not yet discovered.">
+<meta property="og:description" content="目标说明本文完成 VPS 从初始可登录状态到生产级安全环境的完整加固流程，为后续 sing-box &#x2F; 代理服务部署提供稳定基础。 主要目标：  SSH 安全加固（密钥登录 + 禁止密码登录） 防火墙策略（UFW） 暴力破解防护（Fail2Ban） 系统时间同步 Swap 内存保障 自动安全更新 基础排错方法建立   SSH 安全加固（核心模块）Step 1：修改 SSH 端口1nano">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-04T09:27:24.734Z">
+<meta property="article:modified_time" content="2026-07-04T09:29:24.314Z">
 <meta property="article:author" content="Exavais">
-<meta property="article:tag" content="jottings, ramblings, techs, research">
+<meta property="article:tag" content="SSH Hardening">
+<meta property="article:tag" content="Fail2ban">
+<meta property="article:tag" content="UFW">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/posts/335987458/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Exavais's Blog</title>
+  <title>VPS 实战 Step 0：加固与安全初始化 | Exavais's Blog</title>
   
 
 
@@ -153,9 +157,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -171,10 +176,9 @@
       <meta itemprop="name" content="Exavais's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/335987458/" class="post-title-link" itemprop="url">VPS 实战 Step 0：加固与安全初始化</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          VPS 实战 Step 0：加固与安全初始化
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -207,7 +211,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="目标说明"><a href="#目标说明" class="headerlink" title="目标说明"></a>目标说明</h2><p>本文完成 VPS 从初始可登录状态到生产级安全环境的完整加固流程，为后续 sing-box &#x2F; 代理服务部署提供稳定基础。</p>
+        <h2 id="目标说明"><a href="#目标说明" class="headerlink" title="目标说明"></a>目标说明</h2><p>本文完成 VPS 从初始可登录状态到生产级安全环境的完整加固流程，为后续 sing-box &#x2F; 代理服务部署提供稳定基础。</p>
 <p>主要目标：</p>
 <ul>
 <li>SSH 安全加固（密钥登录 + 禁止密码登录）</li>
@@ -332,197 +336,35 @@
 <li>生产部署基础环境</li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/SSH-Hardening/" rel="tag"># SSH Hardening</a>
+              <a href="/tags/Fail2ban/" rel="tag"># Fail2ban</a>
+              <a href="/tags/UFW/" rel="tag"># UFW</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3864463498/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Exavais">
-      <meta itemprop="description" content="Just a blog whose meaning we have not yet discovered.">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Exavais's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/3864463498/" class="post-title-link" itemprop="url">Sing-box 搭建 Xray + Hysteria2 双栈代理与订阅系统</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2026-07-04 04:41:56 / Modified: 17:28:02" itemprop="dateCreated datePublished" datetime="2026-07-04T04:41:56+08:00">2026-07-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VPS/" itemprop="url" rel="index"><span itemprop="name">VPS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="背景与目标">背景与目标</h2>
-<p>本文实现一个基于 sing-box 的双协议代理系统：</p>
-<ul>
-<li>VLESS + Reality（TCP）</li>
-<li>Hysteria2（UDP）</li>
-</ul>
-<p>并最终实现：</p>
-<ul>
-<li>Clash / Shadowrocket 双客户端统一订阅访问</li>
-</ul>
-<hr>
-<h2 id="系统架构设计">系统架构设计</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Clash / Shadowrocket</span><br><span class="line">        ↓</span><br><span class="line">   HTTP 订阅（Nginx）</span><br><span class="line">        ↓</span><br><span class="line">    sing-box VPS</span><br><span class="line">   ├── Reality (TCP 443)</span><br><span class="line">   └── Hysteria2 (UDP 8443)</span><br><span class="line">        ↓</span><br><span class="line">       Internet</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="环境准备与系统优化">环境准备与系统优化</h2>
-<h3 id="1-启用-BBR-加速">1. 启用 BBR 加速</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<p>用于提升 TCP 传输性能。</p>
-<hr>
-<h3 id="2-安装-sing-box">2. 安装 sing-box</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -fsSL https://sing-box.app/deb-install.sh)</span><br><span class="line">systemctl <span class="built_in">enable</span> --now sing-box</span><br></pre></td></tr></table></figure>
-<p>验证运行状态：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status sing-box</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Reality-协议部署（Xray-核心）">Reality 协议部署（Xray 核心）</h2>
-<h3 id="1-基础参数">1. 基础参数</h3>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>端口</td>
-<td>443</td>
-</tr>
-<tr>
-<td>伪装域名</td>
-<td><a target="_blank" rel="noopener" href="http://www.apple.com">www.apple.com</a></td>
-</tr>
-<tr>
-<td>协议</td>
-<td>VLESS + Reality</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="2-生成-UUID-和密钥对">2. 生成 UUID 和密钥对</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/sys/kernel/random/uuid</span><br><span class="line">sing-box generate reality-keypair</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3-配置文件（核心）">3. 配置文件（核心）</h3>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vless&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listen_port&quot;</span><span class="punctuation">:</span> <span class="number">443</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;flow&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xtls-rprx-vision&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="4-启动与验证">4. 启动与验证</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sing-box</span><br><span class="line">ss -lntp | grep 443</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Hysteria2-部署（UDP-加速通道）">Hysteria2 部署（UDP 加速通道）</h2>
-<h3 id="1-特点">1. 特点</h3>
-<ul>
-<li>基于 QUIC</li>
-<li>UDP 传输</li>
-<li>高延迟环境表现优异</li>
-</ul>
-<hr>
-<h3 id="2-服务端配置">2. 服务端配置</h3>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hysteria2&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;listen_port&quot;</span><span class="punctuation">:</span> <span class="number">8443</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3-放行端口">3. 放行端口</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ufw allow 8443/udp</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="客户端验证（Clash-Verge）">客户端验证（Clash Verge）</h2>
-<h3 id="Reality-节点">Reality 节点</h3>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">vless</span></span><br><span class="line"><span class="attr">flow:</span> <span class="string">xtls-rprx-vision</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="Hysteria2-节点">Hysteria2 节点</h3>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">hysteria2</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="双栈订阅系统">双栈订阅系统</h2>
-<h3 id="1-本地订阅文件结构">1. 本地订阅文件结构</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/var/www/html/sub/</span><br><span class="line"> ├── clash.yaml</span><br><span class="line"> └── rocket.txt</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2-Clash-订阅">2. Clash 订阅</h3>
-<p>包含：</p>
-<ul>
-<li>Reality 节点</li>
-<li>Hysteria2 节点</li>
-</ul>
-<p>可以使用：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">url-test</span></span><br></pre></td></tr></table></figure>
-<p>实现自动测速切换。</p>
-<hr>
-<h3 id="3-Shadowrocket-订阅">3. Shadowrocket 订阅</h3>
-<p>使用 URI 格式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vless://UUID@IP:443?security=reality...</span><br><span class="line">hysteria2://PASSWORD@IP:8443?sni=www.bing.com</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="订阅发布（Nginx）">订阅发布（Nginx）</h2>
-<p>通过 HTTP 提供访问：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://your-vps/sub/clash.yaml</span><br><span class="line">http://your-vps/sub/rocket.txt</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="总结">总结</h2>
-<p>本实验实现了：</p>
-<ul>
-<li>sing-box 双协议部署</li>
-<li>Reality + Hysteria2 双栈架构</li>
-<li>Clash / Shadowrocket 统一订阅系统</li>
-<li>基于 URL 的轻量级分发</li>
-</ul>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3864463498/" rel="prev" title="Sing-box 搭建 Xray + Hysteria2 双栈代理与订阅系统">
+      <i class="fa fa-chevron-left"></i> Sing-box 搭建 Xray + Hysteria2 双栈代理与订阅系统
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -575,6 +417,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">目标说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSH-%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%EF%BC%88%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%EF%BC%89"><span class="nav-number"></span> <span class="nav-text">SSH 安全加固（核心模块）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E4%BF%AE%E6%94%B9-SSH-%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">Step 1：修改 SSH 端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E9%85%8D%E7%BD%AE-SSH-%E5%88%AB%E5%90%8D%EF%BC%88%E6%9C%AC%E5%9C%B0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Step 2：配置 SSH 别名（本地）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3%EF%BC%9A%E9%85%8D%E7%BD%AE-SSH-%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">Step 3：配置 SSH 密钥登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4%EF%BC%9A%E7%A6%81%E7%94%A8%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%EF%BC%88%E5%85%B3%E9%94%AE%E5%AE%89%E5%85%A8%E6%AD%A5%E9%AA%A4%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Step 4：禁用密码登录（关键安全步骤）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-%E9%85%8D%E7%BD%AE%E7%94%9F%E6%95%88%E9%AA%8C%E8%AF%81%E4%B8%8E%E6%8E%92%E9%94%99"><span class="nav-number">5.</span> <span class="nav-text">SSH 配置生效验证与排错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%9C%80%E7%BB%88%E7%94%9F%E6%95%88%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">Step 1：查看最终生效配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2%EF%BC%9A%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E9%85%8D%E7%BD%AE%E8%A6%86%E7%9B%96"><span class="nav-number">5.2.</span> <span class="nav-text">Step 2：检查是否存在配置覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-3%EF%BC%9A%E4%BF%AE%E6%AD%A3%E8%A6%86%E7%9B%96%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">Step 3：修正覆盖配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-4%EF%BC%9A%E9%87%8D%E5%90%AF-SSH-%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.4.</span> <span class="nav-text">Step 4：重启 SSH 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-5%EF%BC%9A%E6%9C%80%E7%BB%88%E9%AA%8C%E8%AF%81"><span class="nav-number">5.5.</span> <span class="nav-text">Step 5：最终验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%88SSH-%E6%A8%A1%E5%9D%97%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">小结（SSH 模块）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE%EF%BC%88UFW%EF%BC%89"><span class="nav-number"></span> <span class="nav-text">防火墙配置（UFW）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">Step 1：基础规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">Step 2：状态检查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fail2Ban-%E9%98%B2%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">Fail2Ban 防暴力破解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Step 1：安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">Step 2：启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3%EF%BC%9A%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5"><span class="nav-number">3.</span> <span class="nav-text">Step 3：状态检查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5"><span class="nav-number"></span> <span class="nav-text">系统时间同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA"><span class="nav-number">1.</span> <span class="nav-text">Step 1：设置时区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E9%AA%8C%E8%AF%81%E6%97%B6%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">Step 2：验证时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swap-%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="nav-number"></span> <span class="nav-text">Swap 内存配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E6%A3%80%E6%9F%A5-swap"><span class="nav-number">1.</span> <span class="nav-text">Step 1：检查 swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E5%88%9B%E5%BB%BA-swap%EF%BC%88%E5%A6%82%E6%97%A0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Step 2：创建 swap（如无）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3%EF%BC%9A%E6%B0%B8%E4%B9%85%E7%94%9F%E6%95%88"><span class="nav-number">3.</span> <span class="nav-text">Step 3：永久生效</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0"><span class="nav-number"></span> <span class="nav-text">自动安全更新</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1%EF%BC%9A%E5%AE%89%E8%A3%85%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">Step 1：安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2%EF%BC%9A%E5%90%AF%E7%94%A8%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">2.</span> <span class="nav-text">Step 2：启用自动更新</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E9%AA%8C%E8%AF%81"><span class="nav-number"></span> <span class="nav-text">系统最终验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">SSH 状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fail2Ban"><span class="nav-number">3.</span> <span class="nav-text">Fail2Ban</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">4.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swap"><span class="nav-number">5.</span> <span class="nav-text">Swap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number"></span> <span class="nav-text">小结</span></a></div>
       </div>
       <!--/noindex-->
 
